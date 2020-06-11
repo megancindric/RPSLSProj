@@ -4,14 +4,25 @@ using System.Text;
 
 namespace RPSLSGame
 {
-    class Computer
+    class Computer : Player
     {
         //member variables
+        public Random random = new Random();
 
         //constructor
+        public Computer()
+        {
+
+        }
         //Created from PLAYER parent class
-        //Will add a variable to randomly select from move options
 
         //member methods
+        public override string SelectMove()
+        {
+            int computerSelection = random.Next(4);
+            moveType = moveOptionList[computerSelection];
+            return moveType;
+
+        }
     }
 }

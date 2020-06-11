@@ -6,12 +6,10 @@ namespace RPSLSGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            //Class for player (abstract) that can be instantiated as USER or as COMPUTER
-                //Every player will inherit the same LIST of move options
-                //Player will select from this list based on USER INPUT
-                //Computer will randomly select between 0-4 (5 options, up to index 4) and that will be it's selection
+            Gameplay game = new Gameplay();
 
+
+           
 
 
             //Response options
