@@ -19,9 +19,13 @@ namespace RPSLSGame
             DisplayRules();
             ChooseGameMode();
             ChoosePlayerNames();
-            while(playerOne.playerScore < 2 && playerTwo.playerScore < 2)
+            while(playerOne.playerScore < 5 && playerTwo.playerScore < 5)
             {
-                GameRound();
+                playerOne.SelectMove();
+                playerTwo.SelectMove(); 
+                DisplayMoves();
+                CompareResults();
+                DisplayScore();
             }
             DeclareWinner();
         }
@@ -29,12 +33,12 @@ namespace RPSLSGame
         public void DisplayRules()
         {
             Console.WriteLine("The rules are as follows:");
-            Console.WriteLine("Players can choose Rock, Paper, Scissors, Lizard, or Spock");
-            Console.WriteLine("Rock crushes Paper and Lizard");
-            Console.WriteLine("Paper covers Rock and disproves Spock");
-            Console.WriteLine("Scissors cuts Paper and decapitates Lizard");
-            Console.WriteLine("Lizard eats paper and poisons Spock");
-            Console.WriteLine("Spock vaporizes Rock and smashes Scissors");
+            Console.WriteLine("Players can choose Rock, Paper, Scissors, Lizard, or Spock.");
+            Console.WriteLine("Rock crushes Paper and Lizard.");
+            Console.WriteLine("Paper covers Rock and disproves Spock.");
+            Console.WriteLine("Scissors cuts Paper and decapitates Lizard.");
+            Console.WriteLine("Lizard eats paper and poisons Spock.");
+            Console.WriteLine("Spock vaporizes Rock and smashes Scissors.");
             Console.WriteLine("Got all that?  When you are ready, press any key to continue!");
             Console.ReadLine();
         }
@@ -59,7 +63,6 @@ namespace RPSLSGame
                 ChooseGameMode();
             }
         }
-
         public void ChoosePlayerNames()
         {
             Console.WriteLine("Please enter Player 1's name:");
@@ -67,47 +70,38 @@ namespace RPSLSGame
             Console.WriteLine($"Thanks, {playerOne.playerName}.  Now please enter Player 2's name:");
             string playerTwoName = Console.ReadLine();
             playerTwo.playerName = playerTwoName;
-            Console.WriteLine($"{playerOne.playerName} and {playerTwoName} will be battling!  Press any key to begin!");
-            Console.ReadLine();
+            Console.WriteLine($"{playerOne.playerName} and {playerTwoName} will be battling!");
         }
-        public void GameRound()
+    
+        
+        public void CompareResults()
         {
-            string playerOneMove = playerOne.SelectMove();
-            string playerTwoMove = playerTwo.SelectMove();
-            DisplayMoves();
-            CompareResults(playerOneMove, playerTwoMove);
-        }
-        //SWITCH CASE for PLAYER 1 INPUT 
-        //This will then trigger player methods for what their input is
-        //Will compare this to string of P2 input.
-        public void CompareResults(String playerOneMove, String playerTwoMove)
-        {
-            if (playerOneMove == playerTwoMove)
+            if (playerOne.moveType == playerTwo.moveType)
             {
                 TieGame();
             }
             else
             {
-                switch (playerOneMove)
+                switch (playerOne.moveType)
                 {
                     case "Rock":
-                        RockMoves(playerTwoMove);
+                        RockMoves();
                         break;
 
                     case "Paper":
-                        PaperMoves(playerTwoMove);
+                        PaperMoves();
                         break;
 
                     case "Scissor":
-                        ScissorsMoves(playerTwoMove);
+                        ScissorsMoves();
                         break;
 
                     case "Lizard":
-                        LizardMoves(playerTwoMove);
+                        LizardMoves();
                         break;
 
                     case "Spock":
-                        SpockMoves(playerTwoMove);
+                        SpockMoves();
                         break;
                 }
             }
@@ -138,39 +132,34 @@ namespace RPSLSGame
         public void DisplayScore()
         {
             Console.WriteLine($"{playerOne.playerName} has {playerOne.playerScore} points.  {playerTwo.playerName} has {playerTwo.playerScore} points!");
-            Console.ReadLine();
         }
 
-        public void RockMoves(string moveType)
+        public void RockMoves()
         {
-            //this case where P1 is rock, we take in P2's input
-            if (moveType == "Lizard" || moveType == "Scissors")
+            if (playerTwo.moveType == "Lizard" || playerTwo.moveType == "Scissors")
             {
                 PlayerOnePoint();
             }
-            else if (moveType == "Paper" || moveType == "Spock")
+            else if (playerTwo.moveType == "Paper" || playerTwo.moveType == "Spock")
             {
                 PlayerTwoPoint();
             }
         }
 
-        public void PaperMoves(string moveType)
+        public void PaperMoves()
         {
-            //Case where P1 is Paper, take in P2's input
-            if (moveType == "Rock" || moveType == "Spock")
+            if (playerTwo.moveType == "Rock" || playerTwo.moveType == "Spock")
             {
                 PlayerOnePoint();
             }
-            else if (moveType == "Lizard" || moveType == "Scissors")
+            else if (playerTwo.moveType == "Lizard" || playerTwo.moveType == "Scissors")
             {
                 PlayerTwoPoint();
             }
         }
-
-        public void ScissorsMoves(string moveType)
+        public void ScissorsMoves()
         {
-            //case where P1 input is Scissors, take in P2's input
-            if (moveType == "Paper" || moveType == "Lizard")
+            if (playerTwo.moveType == "Paper" || playerTwo.moveType == "Lizard")
             {
                 PlayerOnePoint();
             }
@@ -178,29 +167,26 @@ namespace RPSLSGame
             {
                 PlayerTwoPoint();
             }
-
         }
 
-        public void LizardMoves(string moveType)
+        public void LizardMoves()
         {
             //case where P1 input is Lizard, take in P2's input
-            if (moveType == "Spock" || moveType == "Paper")
+            if (playerTwo.moveType == "Spock" || playerTwo.moveType == "Paper")
             {
-                Console.WriteLine($"Lizard beats {moveType}!  Player 1 wins!");
-                //PLAYER 1 SCORE++
+                PlayerOnePoint();
             }
             else //input is rock or scissor
             {
-                Console.WriteLine($"{moveType} beats Lizard!  Player 2 wins!");
-                //PLAYER 2 SCORE++
+                PlayerTwoPoint();
             }
 
         }
 
-        public void SpockMoves(string moveType)
+        public void SpockMoves()
         {
             //case where P1 input is Spock, take in P2's input
-            if (moveType == "Rock" || moveType == "Scissors")
+            if (playerTwo.moveType == "Rock" || playerTwo.moveType == "Scissors")
             {
                 PlayerOnePoint();
             }
@@ -214,11 +200,12 @@ namespace RPSLSGame
             if (playerOne.playerScore > playerTwo.playerScore)
             {
                 Console.WriteLine($"{playerOne.playerName} is the winner!!");
-               // Console.WriteLine("Press 1 to play again, or press any other key to exit.");
-
             }
-            //Winner message
-            //Option to play again?
+            else
+            {
+                Console.WriteLine($"{playerTwo.playerName} is the winner!!");
+            }
+            Console.WriteLine("Thank you for playing! :) ");
         }
     }
 }

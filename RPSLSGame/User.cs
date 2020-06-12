@@ -16,26 +16,21 @@ namespace RPSLSGame
 
         //member methods
 
-        public override string SelectMove()
+        public override void SelectMove()
         {
-            Console.WriteLine("Please enter your move selection.");
+            Console.WriteLine($"{playerName}, please enter your move selection. (Enter 'help' for a list of options!)");
             moveType = Console.ReadLine();
-            if(moveOptionList.Contains(moveType))
-            {
-                return moveType;
-            }
-            else if (moveType == "help" || moveType == "Help")
+            if (moveType == "help" || moveType == "Help")
             {
                 DisplayMoves();
                 SelectMove();
-                return moveType;
             }
-            else
+            else if(!moveOptionList.Contains(moveType))
             {
-                Console.WriteLine("Not a valid move!  Please try again, or enter 'help' to see a list of moves.");
+                Console.WriteLine("Not a valid move!  Please try again, or enter 'help' to see a list of moves. (Make sure to capitalize your choice!!)");
                 SelectMove();
-                return moveType;
             }
+            
         }
         public void DisplayMoves()
         {
@@ -44,7 +39,6 @@ namespace RPSLSGame
             {
                 Console.WriteLine(moveOptionList[i]);
             }
-            Console.ReadLine();
         }
     }
 }

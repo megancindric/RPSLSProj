@@ -21,7 +21,7 @@ namespace RPSLSGame
 
         //member methods
 
-        public abstract string SelectMove();
+        public abstract void SelectMove();
 
     }
 }

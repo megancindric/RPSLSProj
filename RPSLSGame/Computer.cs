@@ -17,11 +17,10 @@ namespace RPSLSGame
         //Created from PLAYER parent class
 
         //member methods
-        public override string SelectMove()
+        public override void SelectMove()
         {
             int computerSelection = random.Next(4);
             moveType = moveOptionList[computerSelection];
-            return moveType;
 
         }
     }
