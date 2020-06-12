@@ -19,7 +19,7 @@ namespace RPSLSGame
             DisplayRules();
             ChooseGameMode();
             ChoosePlayerNames();
-            while(playerOne.playerScore < 5 && playerTwo.playerScore < 5)
+            while(playerOne.playerScore < 2 && playerTwo.playerScore < 2)
             {
                 playerOne.SelectMove();
                 playerTwo.SelectMove(); 
@@ -39,6 +39,7 @@ namespace RPSLSGame
             Console.WriteLine("Scissors cuts Paper and decapitates Lizard.");
             Console.WriteLine("Lizard eats paper and poisons Spock.");
             Console.WriteLine("Spock vaporizes Rock and smashes Scissors.");
+            Console.WriteLine("The first player to 2 points wins!!");
             Console.WriteLine("Got all that?  When you are ready, press any key to continue!");
             Console.ReadLine();
         }
@@ -92,7 +93,7 @@ namespace RPSLSGame
                         PaperMoves();
                         break;
 
-                    case "Scissor":
+                    case "Scissors":
                         ScissorsMoves();
                         break;
 
@@ -131,7 +132,8 @@ namespace RPSLSGame
 
         public void DisplayScore()
         {
-            Console.WriteLine($"{playerOne.playerName} has {playerOne.playerScore} points.  {playerTwo.playerName} has {playerTwo.playerScore} points!");
+            Console.WriteLine("The current score is:");
+            Console.WriteLine($"{playerOne.playerName}: {playerOne.playerScore}\n{playerTwo.playerName}: {playerTwo.playerScore}");
         }
 
         public void RockMoves()
@@ -145,7 +147,6 @@ namespace RPSLSGame
                 PlayerTwoPoint();
             }
         }
-
         public void PaperMoves()
         {
             if (playerTwo.moveType == "Rock" || playerTwo.moveType == "Spock")
@@ -180,9 +181,7 @@ namespace RPSLSGame
             {
                 PlayerTwoPoint();
             }
-
         }
-
         public void SpockMoves()
         {
             //case where P1 input is Spock, take in P2's input
