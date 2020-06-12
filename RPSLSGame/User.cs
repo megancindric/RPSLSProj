@@ -11,7 +11,7 @@ namespace RPSLSGame
         //constructor
         public User()
         {
-
+            ChoosePlayerName();
         }
 
         //member methods
@@ -25,12 +25,12 @@ namespace RPSLSGame
                 DisplayMoves();
                 SelectMove();
             }
-            else if(!moveOptionList.Contains(moveType))
+            else if (!moveOptionList.Contains(moveType))
             {
                 Console.WriteLine("Not a valid move!  Please try again, or enter 'help' to see a list of moves. (Make sure to capitalize your choice!!)");
                 SelectMove();
             }
-            
+
         }
         public void DisplayMoves()
         {
@@ -40,5 +40,12 @@ namespace RPSLSGame
                 Console.WriteLine(moveOptionList[i]);
             }
         }
+        public void ChoosePlayerName()
+        {
+            Console.WriteLine("Please enter your name:");
+            playerName = Console.ReadLine();
+            Console.WriteLine($"Thanks, {playerName}!");
+        }
     }
 }
+

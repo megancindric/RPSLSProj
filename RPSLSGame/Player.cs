@@ -10,7 +10,7 @@ namespace RPSLSGame
         public string moveType;
         public string playerName;
         public int playerScore;
-        public List<String> moveOptionList;
+        public List<string> moveOptionList;
 
         //constructor
         public Player()
@@ -18,9 +18,7 @@ namespace RPSLSGame
             playerScore = 0;
             moveOptionList = new List<string> { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
         }
-
         //member methods
-
         public abstract void SelectMove();
 
     }

@@ -18,7 +18,7 @@ namespace RPSLSGame
             playerOne = new User();
             DisplayRules();
             ChooseGameMode();
-            ChoosePlayerNames();
+
             while(playerOne.playerScore < 2 && playerTwo.playerScore < 2)
             {
                 playerOne.SelectMove();
@@ -63,18 +63,7 @@ namespace RPSLSGame
                 Console.WriteLine("Not a valid input!  Please try again!");
                 ChooseGameMode();
             }
-        }
-        public void ChoosePlayerNames()
-        {
-            Console.WriteLine("Please enter Player 1's name:");
-            playerOne.playerName = Console.ReadLine();
-            Console.WriteLine($"Thanks, {playerOne.playerName}.  Now please enter Player 2's name:");
-            string playerTwoName = Console.ReadLine();
-            playerTwo.playerName = playerTwoName;
-            Console.WriteLine($"{playerOne.playerName} and {playerTwoName} will be battling!");
-        }
-    
-        
+        }    
         public void CompareResults()
         {
             if (playerOne.moveType == playerTwo.moveType)

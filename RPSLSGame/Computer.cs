@@ -7,21 +7,20 @@ namespace RPSLSGame
     class Computer : Player
     {
         //member variables
-        public Random random = new Random();
+        public Random random;
+        //Best practice to DECLARE a member variable but ASSIGN in constructor (saves on memory!!)
 
         //constructor
         public Computer()
         {
-
+            random = new Random();
+            playerName = "Mr. Robot";
         }
-        //Created from PLAYER parent class
-
         //member methods
         public override void SelectMove()
         {
-            int computerSelection = random.Next(4);
+            int computerSelection = random.Next(moveOptionList.Count);
             moveType = moveOptionList[computerSelection];
-
         }
     }
 }
