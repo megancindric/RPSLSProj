@@ -8,7 +8,6 @@ namespace RPSLSGame
     {
         //member variables
         public Random random;
-        //Best practice to DECLARE a member variable but ASSIGN in constructor (saves on memory!!)
 
         //constructor
         public Computer()
@@ -19,8 +18,8 @@ namespace RPSLSGame
         //member methods
         public override void SelectMove()
         {
-            int computerSelection = random.Next(moveOptionList.Count);
-            moveType = moveOptionList[computerSelection];
+            int computerSelection = random.Next(gestureOptions.Count);
+            moveChoice = gestureOptions[computerSelection];
         }
     }
 }

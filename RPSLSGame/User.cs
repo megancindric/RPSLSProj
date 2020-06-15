@@ -13,31 +13,30 @@ namespace RPSLSGame
         {
             ChoosePlayerName();
         }
-
         //member methods
-
         public override void SelectMove()
         {
-            Console.WriteLine($"{playerName}, please enter your move selection. (Enter 'help' for a list of options!)");
-            moveType = Console.ReadLine();
-            if (moveType == "help" || moveType == "Help")
+            DisplayMoves();
+            Console.WriteLine($"{playerName}, please enter the number of your move selection.");
+            int moveNumber = Int32.Parse(Console.ReadLine());
+            if (moveNumber < gestureOptions.Count)
             {
-                DisplayMoves();
+                moveChoice = gestureOptions[moveNumber];
+            }
+            else
+            {
+                Console.WriteLine("Not a valid move!  Please try again.");
                 SelectMove();
             }
-            else if (!moveOptionList.Contains(moveType))
-            {
-                Console.WriteLine("Not a valid move!  Please try again, or enter 'help' to see a list of moves. (Make sure to capitalize your choice!!)");
-                SelectMove();
-            }
-
+                    
         }
+
         public void DisplayMoves()
         {
             Console.WriteLine("Your options for game moves are:");
-            for (int i = 0; i < moveOptionList.Count; i++)
+            for (int i = 0; i < gestureOptions.Count; i++)
             {
-                Console.WriteLine(moveOptionList[i]);
+                Console.WriteLine(i + ". : " + gestureOptions[i].moveType);
             }
         }
         public void ChoosePlayerName()
